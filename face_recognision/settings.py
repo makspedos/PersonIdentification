@@ -31,13 +31,13 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "web.apps.WebConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "web",
 ]
 
 MIDDLEWARE = [
@@ -76,9 +76,16 @@ WSGI_APPLICATION = "face_recognision.wsgi.application"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'coursedb',
+        'HOST': 'localhost',
+        'USER': 'root',
+        'PASSWORD': 'Djangodotpy2003',
+        'PORT': 3306,
+        'OPTIONS': {
+            'sql_mode': 'traditional',
+        }
     }
 }
 

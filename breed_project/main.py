@@ -29,9 +29,6 @@ for file in files:
 x_ages = list(set(ages))
 y_ages = [ages.count(i) for i in x_ages]
 plt.bar(x_ages,y_ages)
-# plt.show()
-# print("Max value:",max(ages))
-
 def display(img):
     plt.imshow(img[:,:,0])
     plt.set_cmap('gray')
@@ -39,9 +36,6 @@ def display(img):
 idx = 1
 
 sample = images[idx]
-# print("Gender:",genders[idx],"Age:",ages[idx])
-# display(sample)
-
 
 
 def age_group(age):
