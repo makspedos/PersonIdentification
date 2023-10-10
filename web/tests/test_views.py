@@ -8,7 +8,7 @@ class TestViews(TestCase):
     def test_1(self):
         response = self.client.get(reverse('web:test'))
         self.assertEquals(response.status_code, 200)
-        self.assertTemplateUsed(response, 'html/home.html')
+        self.assertTemplateUsed(response, 'html/test.html')
         self.assertContains(response, 'Hello')
 
 

@@ -1,8 +1,16 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Coursework</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
 </head>
 <body>
-    <h1>Hello, it's program to recognise faces</h1>
+    {% if img %}
+        <div>
+            <img src="{{ img.img.url }}">
+        </div>
+    {% else %}
+        <p>No images</p>
+    {% endif %}
 </body>
 </html>

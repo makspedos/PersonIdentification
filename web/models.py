@@ -135,7 +135,7 @@ class Estimation(models.Model):
 
 class Image(models.Model):
     img = models.ImageField(upload_to='images/')
-    user = models.ForeignKey('User', models.DO_NOTHING, db_column='user')
+    #user = models.ForeignKey('User', models.DO_NOTHING, db_column='user', default='')
 
     class Meta:
         managed = True
