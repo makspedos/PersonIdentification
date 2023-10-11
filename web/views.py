@@ -11,16 +11,18 @@ def form_page(request):
     if request.POST:
         print('first point')
         if form.is_valid():
-            data= request.POST
-            img = data.get('img', '')
-            print(img)
-            Image.objects.create(img=img)
-            return redirect('/home/')
+            form.save()
+            return redirect('web:home')
         else:
             form =FaceForm()
 
     return render(request, 'html/form.html', locals())
 
 def home(request):
-    img = Image.objects.last()
-    return render(request, 'html/home.html', locals())
+    image = Image.objects.all()
+    print(image)
+
+    context = {
+        'image':image,
+    }
+    return render(request, 'html/home.html', context)

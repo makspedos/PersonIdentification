@@ -5,9 +5,11 @@
     <title>Title</title>
 </head>
 <body>
-    {% if img %}
+    {% if image %}
         <div>
-            <img src="{{ img.img.url }}">
+        {% for i in image %}
+            <img src="{{ i.img.url }}">
+        {% endfor %}
         </div>
     {% else %}
         <p>No images</p>

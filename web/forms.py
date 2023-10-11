@@ -1,4 +1,6 @@
 from django import forms
-
-class FaceForm(forms.Form):
-    image =forms.ImageField(required=True, label='img')
+from .models import Image
+class FaceForm(forms.ModelForm):
+    class Meta:
+       model = Image
+       fields = '__all__'

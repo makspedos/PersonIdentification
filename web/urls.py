@@ -7,8 +7,8 @@ app_name="web"
 
 urlpatterns = [
     path("", views.test, name='test'),
-    path('form/', views.form_page),
-    path('home/', views.home)
+    path('form/', views.form_page, name='form'),
+    path('home', views.home, name='home'),
 ]
 
 if settings.DEBUG:
