@@ -1,0 +1,14 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.container {
+  display: flex;
+  height: 100%;
+}
+
+.column {
+  flex: 1;
+  border: 1px solid #000; /* Add borders for visualization */
+}
