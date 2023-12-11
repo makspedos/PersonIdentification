@@ -17,13 +17,13 @@ class TestUserCreation(TestCase):
         self.assertFalse(user.is_superuser)
 
     def test_login_template(self):
-        response = self.client.get("/account/login/")
-        self.assertTemplateUsed(response, "registration/login.html")
+        response = self.client.get("/accounts/login/")
+        self.assertTemplateUsed(response, "accounts/login.html")
 
     def test_signup_template(self):
         response = self.client.get(reverse("signup"))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, "registration/signup.html")
+        self.assertTemplateUsed(response, "accounts/signup.html")
 
     def test_signup_form(self):
         response = self.client.get(reverse("signup"))
@@ -31,5 +31,5 @@ class TestUserCreation(TestCase):
         self.assertIsInstance(form, CustomUserCreationForm)
 
     def test_signup_view(self):
-        view = resolve("/account/signup/")
+        view = resolve("/accounts/signup/")
         self.assertEqual(view.func.__name__, SignUpPageView.as_view().__name__)
