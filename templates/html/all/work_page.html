@@ -1,0 +1,11 @@
+{% extends "html/_base.html" %}
+{% block content %}
+    {% load static %}
+    {% if image %}
+        <div>
+            <img src="{% static 'faces/face.png' %}" alt="Image description">
+        </div>
+    {% else %}
+        <p>No images</p>
+    {% endif %}
+{% endblock %}

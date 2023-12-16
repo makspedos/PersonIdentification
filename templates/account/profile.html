@@ -1,0 +1,7 @@
+{% extends "html/_base.html" %}
+{% load static %}
+{% block content %}
+    <h1>Welcome, {{ user.username }} </h1>
+    <a href="{% url 'account_email' %}">Change email</a>
+    <p><a href="{% url 'account_change_password' %}">Change password</a></p>
+{% endblock %}
