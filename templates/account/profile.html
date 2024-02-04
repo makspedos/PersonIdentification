@@ -1,7 +1,48 @@
 {% extends "html/_base.html" %}
 {% load static %}
 {% block content %}
-    <h1>Welcome, {{ user.username }} </h1>
-    <a href="{% url 'account_email' %}">Change email</a>
-    <p><a href="{% url 'account_change_password' %}">Change password</a></p>
+        <div class="container">
+        <h2>Welcome, {{ user.username }}</h2>
+        <table>
+            <caption class="caption-one"><strong>Actions:</strong></caption>
+            <tr>
+                <th class="table-th">
+                    <br class="table-br">
+                    <a href="{% url 'account_email' %}" class="a-simple">Change email</a>
+                </th>
+            </tr>
+            <tr>
+                <th class="table-th">
+                    <a href="{% url 'account_change_password' %}" class="a-simple">Change password</a>
+                </th>
+            </tr>
+            <tr>
+                <th class="table-th">
+                        <a href="{% url 'accounts:username' %}" class="a-simple">Change username</a>
+                </th>
+            </tr>
+        </table>
+        </br>
+        <table>
+            <caption class="caption-one"><strong>Your information:</strong></caption>
+
+            <tr>
+                <th class="table-th">
+                    <br class="table-br">
+                    <div>Email: {{ user.email }}</div>
+                </th>
+            </tr>
+            <tr>
+                <th class="table-th">
+                    <div>Name: {{ user.username }}</div>
+                </th>
+            </tr>
+            <tr>
+                <th class="table-th">
+                    <div>Date joined: {{ user.date_joined }}</div>
+                </th>
+            </tr>
+        </table>
+    </div>
+    </div>
 {% endblock %}

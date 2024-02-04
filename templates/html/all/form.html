@@ -1,16 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <h3>Select image</h3>
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Submit</button>
-    </form>
+{% extends 'html/_base.html' %}
+{% load static %}
+{% block content %}
+    <div class="dark-blue-window">
+    <h1>
 
-</body>
-</html>
+        <div class="container">
+        Quick instruction:<br>
+        1 Upload your image<br>
+        2 Select properties<br>
+        3 Get results<br>
+        4 Enjoy our product<br>
+        </div>
+    </h1>
+    <!-- Add any other content or elements here -->
+  </div>
+
+    <div class="work-section">
+        {% if user.is_authenticated %}
+            <h2>Select image</h2>
+                <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                    <input type="file" name="img"> <!-- Render the image upload field -->
+                    <h2>Select properties:</h2>
+                    <input type="checkbox" id="age" name="age" value="true">
+                    <label for="age"><p>Age</p></label><br>
+                    <input type="checkbox" id="gender" name="gender" value="true">
+                    <label for="gender"><p>Gender</p></label><br>
+                    <input type="checkbox" id="emotion" name="emotion" value="true">
+                    <label for="emotion"><p>Emotion</p></label><br>
+                    <button type="submit">Submit</button>
+                </form>
+        {% else %}
+            <h2>You need first to login or sign up</h2>
+            <a href="{% url 'account_login' %}">Log In</a>
+            <a href="{% url 'account_signup' %}">Register</a>
+        {% endif %}
+    </div>
+{% endblock %}

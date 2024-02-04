@@ -1,14 +1,63 @@
-html, body {
-  height: 100%;
+h3{
+  color: red;
+}
+.button-return{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+caption.caption-one{
+  background-color: lightblue;
+  width: 50%;
+  padding: 3px;
+  position: absolute;
+
+}
+a.a-simple{
+  text-decoration: none;
+  color: blue;
+}
+
+.color-info{
+  color: blue;
+}
+th.table-th{
+  background: aliceblue;
+  width: 768px;
+  padding-bottom: 10px;
+}
+
+body, h1 {
   margin: 0;
 }
 
-.container {
-  display: flex;
-  height: 100%;
+/* Style for the dark blue window */
+.dark-blue-window {
+  background-color: #13293d; /* Dark blue color */
+  color: #ffffff; /* White text color */
+  padding: 50px; /* Adjust padding as needed */
+  text-align: left; /* Center the text */
+  font-family: Arial, sans-serif; /* Change the font as desired */
 }
 
-.column {
-  flex: 1;
-  border: 1px solid #000; /* Add borders for visualization */
+.dark-blue-window h1 {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.work-section {
+  padding: 40px;
+  background-color: #f5f5f5;
+}
+
+h2 {
+  /* Style for the section title */
+  font-size: 2.5em; /* Adjust the font size as needed */
+  color: #333; /* Text color */
+  margin-bottom: 20px; /* Add space between title and paragraph */
+}
+
+p{
+  font-size: 1.2em; /* Adjust the font size as needed */
+  color: #666; /* Text color */
+  line-height: 1.6; /* Adjust line height for readability */
 }

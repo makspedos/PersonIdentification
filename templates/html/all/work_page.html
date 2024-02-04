@@ -1,11 +1,14 @@
 {% extends "html/_base.html" %}
+{% load static %}
 {% block content %}
-    {% load static %}
-    {% if image %}
-        <div>
-            <img src="{% static 'faces/face.png' %}" alt="Image description">
-        </div>
-    {% else %}
-        <p>No images</p>
-    {% endif %}
+    <div class="text-center">
+        {% if image %}
+                <h1>Result face</h1>
+                <img src="{% static 'faces/face.png' %}" alt="Image description">
+                    {{ output }}
+        {% else %}
+            <p>No images</p>
+        {% endif %}
+        <p><a href="{% url 'web:form_page' %}"><button class="button-return">Return to selecting image</button></a></p>
+    </div>
 {% endblock %}
