@@ -20,7 +20,7 @@
             <h2>Select image</h2>
                 <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
-                    <input type="file" name="img"> <!-- Render the image upload field -->
+                    <input type="file" name="img">
                     <h2>Select properties:</h2>
                     <input type="checkbox" id="age" name="age" value="true">
                     <label for="age"><p>Age</p></label><br>

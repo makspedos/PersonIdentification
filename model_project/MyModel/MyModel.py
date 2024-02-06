@@ -3,6 +3,7 @@ import cv2
 from keras.models import *
 from keras.applications.resnet50 import preprocess_input
 import tensorflow as tf
+import os
 
 
 class PredictionModel():
@@ -15,8 +16,8 @@ class PredictionModel():
         self.cascade = cv2.CascadeClassifier(
             'C:/Users/maksp/PycharmProjects/face_recognision/haarcascade_frontalface_default.xml')
 
-    def face_detection(self, test_image, params):
-        test_image = cv2.imread('C:/Users/maksp/PycharmProjects/face_recognision/media/' + str(test_image))
+    def face_detection(self, params, img):
+        test_image = cv2.imread(f'C:/Users/maksp/PycharmProjects/face_recognision{img["image"]}')
         gray = cv2.cvtColor(test_image, cv2.COLOR_BGR2GRAY)
         faces = self.cascade.detectMultiScale(gray, 1.3, 5)
         i = 0
@@ -39,19 +40,21 @@ class PredictionModel():
         result_params = {}
         image = cv2.cvtColor(img_gray, cv2.COLOR_GRAY2RGB)
         image = cv2.resize(image, (224, 224), interpolation=cv2.INTER_AREA)
-        image_shaped = image / 255.0
-        image_shaped = np.reshape(image_shaped, (1, 224, 224, 3))
+        image_shaped = np.reshape(image, (1, 224, 224, 3))
 
         if params['age'] == 'true':
-            output_age = self.age_model.predict(image_shaped)
+            output_age = self.age_model.predict(image_shaped)[0][0]
 
         if params['emotion'] == 'true':
             emotion_image = tf.expand_dims(image, 0)
             emotion_image = preprocess_input(emotion_image)
-            output_emotion = self.emotion_model.predict(emotion_image)
+            output_emotion = self.emotion_model.predict(emotion_image)[0]
+            output_emotion = self.emotion_convert(output_emotion)
+
 
         if params['gender'] == 'true':
-            output_gender = self.gender_model.predict(image_shaped)
+            output_gender = self.gender_model.predict(image_shaped)[0][0]
+            output_gender = self.gender_convert(output_gender)
 
         result_params['age'] = output_age
         result_params['emotion'] = output_emotion
@@ -61,6 +64,23 @@ class PredictionModel():
     def prediction_output(self, params, i):
         output_str = f'{i}: '
         for key, value in params.items():
-            if value != 0:
+            if type(value) == dict:
+                output_str += f"Predicted {key}: "
+                for key2, value2 in value.items():
+                    output_str += f"{key2} - {value2} % \n"
+            elif value != 0:
                 output_str += f"Predicted {key} - {value} \t"
         return output_str
+
+    def gender_convert(self, output_gender):
+        return 'Man' if output_gender < 0.5 else 'Woman'
+
+    def emotion_convert(self, output_emotion):
+        key_emotion = ['Angry', 'Happy', 'Neutral', 'Sad', 'Surprise']
+        values_emotion = []
+        for i in output_emotion:
+            i = f"{i:.10f}"
+
+            values_emotion.append(i)
+        output_emotion = dict(zip(key_emotion, values_emotion))
+        return output_emotion
