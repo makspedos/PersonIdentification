@@ -1,48 +1,46 @@
 {% extends "html/_base.html" %}
 {% load static %}
+
 {% block content %}
         <div class="container">
-        <h2>Welcome, {{ user.username }}</h2>
-        <table>
-            <caption class="caption-one"><strong>Actions:</strong></caption>
-            <tr>
-                <th class="table-th">
-                    <br class="table-br">
-                    <a href="{% url 'account_email' %}" class="a-simple">Change email</a>
-                </th>
-            </tr>
-            <tr>
-                <th class="table-th">
-                    <a href="{% url 'account_change_password' %}" class="a-simple">Change password</a>
-                </th>
-            </tr>
-            <tr>
-                <th class="table-th">
-                        <a href="{% url 'accounts:username' %}" class="a-simple">Change username</a>
-                </th>
-            </tr>
-        </table>
-        </br>
-        <table>
-            <caption class="caption-one"><strong>Your information:</strong></caption>
+        <div class="dark-blue-window">
+            <h1>Вітаю, {{ user.username }}</h1>
+        </div>
 
-            <tr>
-                <th class="table-th">
-                    <br class="table-br">
-                    <div>Email: {{ user.email }}</div>
-                </th>
-            </tr>
-            <tr>
-                <th class="table-th">
-                    <div>Name: {{ user.username }}</div>
-                </th>
-            </tr>
-            <tr>
-                <th class="table-th">
-                    <div>Date joined: {{ user.date_joined }}</div>
-                </th>
-            </tr>
-        </table>
-    </div>
-    </div>
+            <div class="work-section">
+            <div class="window">
+                <div class="profile">
+                    <img src="{% static "account/profile.jpg" %}" alt="Profile Picture">
+                    <h2>{{ user.username }}</h2>
+                </div>
+            <ul class="properties">
+                <li><span>Пошта:</span> {{ user.email }}</li>
+                <li><span>Дата початку користування:</span> {{ user.date_joined }}</li>
+                <li><span>Роль:</span> Звичайна</li>
+            </ul>
+            </div>
+            <div class="action-table">
+                <table>
+                    <caption class="caption-one"><strong>Дії:</strong></caption>
+                        <tr>
+                            <th class="table-th">
+                                <br class="table-br">
+                                <a href="{% url 'account_email' %}" class="a-simple">Змінити пошту</a>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="table-th">
+                                <a href="{% url 'account_change_password' %}" class="a-simple">Змінити пароль</a>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="table-th">
+                                <a href="{% url 'accounts:username' %}" class="a-simple">Змінити нікнейм</a>
+                            </th>
+                        </tr>
+                </table>
+            </div>
+            </div>
+
+        </div>
 {% endblock %}

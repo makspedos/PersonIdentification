@@ -41,42 +41,42 @@ class PredictionModel():
         image = cv2.cvtColor(img_gray, cv2.COLOR_GRAY2RGB)
         image = cv2.resize(image, (224, 224), interpolation=cv2.INTER_AREA)
         image_shaped = np.reshape(image, (1, 224, 224, 3))
+        image_shaped = image_shaped / 255.0
+        if params['вік'] == 'true':
+            output_age = self.age_model.predict(image_shaped)
 
-        if params['age'] == 'true':
-            output_age = self.age_model.predict(image_shaped)[0][0]
-
-        if params['emotion'] == 'true':
+        if params['емоції'] == 'true':
             emotion_image = tf.expand_dims(image, 0)
             emotion_image = preprocess_input(emotion_image)
             output_emotion = self.emotion_model.predict(emotion_image)[0]
             output_emotion = self.emotion_convert(output_emotion)
 
 
-        if params['gender'] == 'true':
+        if params['стать'] == 'true':
             output_gender = self.gender_model.predict(image_shaped)[0][0]
             output_gender = self.gender_convert(output_gender)
 
-        result_params['age'] = output_age
-        result_params['emotion'] = output_emotion
-        result_params['gender'] = output_gender
+        result_params['вік'] = output_age
+        result_params['емоції'] = output_emotion
+        result_params['стать'] = output_gender
         return result_params
 
     def prediction_output(self, params, i):
         output_str = f'{i}: '
         for key, value in params.items():
             if type(value) == dict:
-                output_str += f"Predicted {key}: "
+                output_str += f"Передбачений {key}: "
                 for key2, value2 in value.items():
                     output_str += f"{key2} - {value2} % \n"
             elif value != 0:
-                output_str += f"Predicted {key} - {value} \t"
+                output_str += f"Передбачений {key} - {value} \n"
         return output_str
 
     def gender_convert(self, output_gender):
-        return 'Man' if output_gender < 0.5 else 'Woman'
+        return 'Чоловік' if output_gender < 0.5 else 'Жінка'
 
     def emotion_convert(self, output_emotion):
-        key_emotion = ['Angry', 'Happy', 'Neutral', 'Sad', 'Surprise']
+        key_emotion = ['Злість', 'Радість', 'Нейтральність', 'Сум', 'Здивованість']
         values_emotion = []
         for i in output_emotion:
             i = f"{i:.10f}"

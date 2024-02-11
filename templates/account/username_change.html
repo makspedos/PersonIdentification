@@ -1,10 +1,17 @@
 {% extends "html/_base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <h2>Changing username</h2>
-    <form method="post">
+    <div class="container">
+        <div class="dark-blue-window">
+            <h1>Changing username</h1>
+        </div>
+
+    <div class="work-section">
+        <form method="post">
         {% csrf_token %}
         {{ form|crispy }}
-    <button type="submit">Accept</button>
-    </form>
+        <button type="submit">Accept</button>
+        </form>
+        </div>
+    </div>
 {% endblock %}

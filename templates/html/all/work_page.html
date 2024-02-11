@@ -1,14 +1,21 @@
 {% extends "html/_base.html" %}
 {% load static %}
 {% block content %}
-    <div class="text-center">
-        {% if image %}
-                <h1>Result face</h1>
-                <img src="{% static 'faces/face.png' %}" alt="Image description">
-                    {{ output }}
-        {% else %}
-            <p>No images</p>
-        {% endif %}
-        <p><a href="{% url 'web:form_page' %}"><button class="button-return">Return to selecting image</button></a></p>
+    <div class="container">
+        <div class="dark-blue-window">
+            <h1>Результати ідентифікації</h1>
+        </div>
+        <div class="work-section">
+            {% if image %}
+                <img src="{% static 'faces/face.png' %}" width="400" class="img-face" alt="Image description">
+                    <div class="output">
+                        <h2>Передбачення</h2>
+                        {{ output }}
+                    </div>
+            {% else %}
+                <p>No images</p>
+            {% endif %}
+            <p><a href="{% url 'web:form_page' %}"><button class="submit-form">Повернутися до обирання меню форми</button></a></p>
+        </div>
     </div>
 {% endblock %}
