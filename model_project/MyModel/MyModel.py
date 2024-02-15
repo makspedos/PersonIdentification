@@ -3,7 +3,6 @@ import cv2
 from keras.models import *
 from keras.applications.resnet50 import preprocess_input
 import tensorflow as tf
-import os
 
 
 class PredictionModel():
@@ -20,18 +19,19 @@ class PredictionModel():
         test_image = cv2.imread(f'C:/Users/maksp/PycharmProjects/face_recognision{img["image"]}')
         gray = cv2.cvtColor(test_image, cv2.COLOR_BGR2GRAY)
         faces = self.cascade.detectMultiScale(gray, 1.3, 5)
-        i = 0
-        output_str = ''
+        face_count = 0
+        result_params=[]
+
         for (x, y, w, h) in faces:
-            i = i + 1
+            face_count = face_count + 1
             cv2.rectangle(test_image, (x, y), (x + w, y + h), (203, 12, 255), 2)
             img_gray = gray[y:y + h, x:x + w]
-            result_params = self.model_prediction(img_gray, params)
-            output_str += self.prediction_output(result_params, i)
+            result_params.append(self.model_prediction(img_gray, params))
             col = (0, 255, 0)
-            cv2.putText(test_image, str(i), (x, y), cv2.FONT_HERSHEY_SIMPLEX, 1, col, 2)
+            cv2.putText(test_image, str(face_count), (x, y), cv2.FONT_HERSHEY_SIMPLEX, 1, col, 2)
         cv2.imwrite(r'C:\Users\maksp\PycharmProjects\face_recognision\web\static\faces\face.png', test_image)
-        return output_str
+        col_list = list(result_params[0].keys())
+        return result_params, col_list
 
     def model_prediction(self, img_gray, params):
         output_age = 0
@@ -43,7 +43,12 @@ class PredictionModel():
         image_shaped = np.reshape(image, (1, 224, 224, 3))
         image_shaped = image_shaped / 255.0
         if params['вік'] == 'true':
-            output_age = self.age_model.predict(image_shaped)
+            output_age = self.age_model.predict(image_shaped)[0][0]
+            output_age = int(output_age)
+
+        if params['стать'] == 'true':
+            output_gender = self.gender_model.predict(image_shaped)[0][0]
+            output_gender = self.gender_convert(output_gender)
 
         if params['емоції'] == 'true':
             emotion_image = tf.expand_dims(image, 0)
@@ -52,35 +57,32 @@ class PredictionModel():
             output_emotion = self.emotion_convert(output_emotion)
 
 
-        if params['стать'] == 'true':
-            output_gender = self.gender_model.predict(image_shaped)[0][0]
-            output_gender = self.gender_convert(output_gender)
+
 
         result_params['вік'] = output_age
-        result_params['емоції'] = output_emotion
         result_params['стать'] = output_gender
-        return result_params
+        result_params['емоції'] = output_emotion
 
-    def prediction_output(self, params, i):
-        output_str = f'{i}: '
-        for key, value in params.items():
-            if type(value) == dict:
-                output_str += f"Передбачений {key}: "
-                for key2, value2 in value.items():
-                    output_str += f"{key2} - {value2} % \n"
-            elif value != 0:
-                output_str += f"Передбачений {key} - {value} \n"
-        return output_str
+        result_params = {key: value for key, value in result_params.items() if value != 0}
+        return result_params
 
     def gender_convert(self, output_gender):
         return 'Чоловік' if output_gender < 0.5 else 'Жінка'
 
+    # def emotion_convert(self, output_emotion):
+    #     key_emotion = ['Злість', 'Радість', 'Нейтральність', 'Сум', 'Здивованість']
+    #     values_emotion = []
+    #     for i in output_emotion:
+    #         i = f"{i:.10f}"
+    #
+    #         values_emotion.append(i)
+    #     output_emotion = dict(zip(key_emotion, values_emotion))
+    #     return output_emotion
+
     def emotion_convert(self, output_emotion):
-        key_emotion = ['Злість', 'Радість', 'Нейтральність', 'Сум', 'Здивованість']
         values_emotion = []
         for i in output_emotion:
             i = f"{i:.10f}"
 
             values_emotion.append(i)
-        output_emotion = dict(zip(key_emotion, values_emotion))
-        return output_emotion
+        return values_emotion

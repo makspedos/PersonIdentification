@@ -64,9 +64,10 @@
                 <button type="submit" class="submit-form2">Підтвердити</button>
                 </form>
         {% else %}
-            <h2>You need first to login or sign up</h2>
-            <a href="{% url 'account_login' %}">Log In</a>
-            <a href="{% url 'account_signup' %}">Register</a>
+            <h2>Щоб почати роботу зі застосунком вам потрібно спочатку авторизуватись</h2>
+            <a href="{% url 'account_login' %}">Увійти</a>
+            Або
+            <a href="{% url 'account_signup' %}">Зареєструватись</a>
         {% endif %}
     </div>
     </div>

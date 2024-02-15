@@ -42,12 +42,17 @@ def work_page(request):
     params = request.session.get('params', '')
     img = request.session.get('img', '')
     model = PredictionModel()
-    output = model.face_detection(params, img)
-    image = 'C:/Users/maksp/PycharmProjects/face_recognision/web/static/faces/face.png'
+    result_list, col_list = model.face_detection(params, img)
 
+    image = 'C:/Users/maksp/PycharmProjects/face_recognision/web/static/faces/face.png'
     context = {
         'image': image,
-        'output': output,
+        'result_list': result_list,
+        'col_list': col_list,
+        'list_emotions': False,
     }
+    if 'емоції' in col_list:
+        list_emotions = ['Злість', 'Радість', 'Нейтральність', 'Сум', 'Здивованість']
+        context['list_emotions'] = list_emotions
 
     return render(request, 'html/all/work_page.html', context)

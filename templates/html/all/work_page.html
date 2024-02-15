@@ -7,10 +7,48 @@
         </div>
         <div class="work-section">
             {% if image %}
-                <img src="{% static 'faces/face.png' %}" width="400" class="img-face" alt="Image description">
+                <img src="{% static 'faces/face.png' %}" width="350" class="img-face" alt="Image description">
                     <div class="output">
-                        <h2>Передбачення</h2>
-                        {{ output }}
+                        <div class="text-left">
+                            <h2>Передбачення</h2>
+                        </div>
+                        <table style="width:60%">
+                            <tr>
+                                <th rowspan="{% if "емоції" in col_list %}2 {% else %}1{% endif %}">
+                                    Обличчя
+                                </th>
+                                {% for col in col_list %}
+                                    {% if col == 'емоції' %}
+                                        <th colspan="5">{{ col|title }}</th>
+                                    {% else %}
+                                        <th rowspan="{% if "емоції" in col_list %}2 {% else %}1{% endif %}">
+                                            {{ col|title }}
+                                        </th>
+                                    {% endif %}
+                                {% endfor %}
+                            </tr>
+                                {% if list_emotions %}
+                                    <tr>
+                                        {% for emotion in list_emotions %}
+                                            <td>{{ emotion }}</td>
+                                        {% endfor %}
+                                    </tr>
+                                {% endif %}
+                                {% for dict_predict in result_list %}
+                                    <tr>
+                                        <td>{{ forloop.counter }}</td>
+                                        {% for key, value in dict_predict.items %}
+                                            {% if key == "емоції" %}
+                                                {% for i in value %}
+                                                    <td>{{ i }}</td>
+                                                {% endfor %}
+                                             {% else %}
+                                                <td>{{ value }}</td>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </tr>
+                                {% endfor %}
+                        </table>
                     </div>
             {% else %}
                 <p>No images</p>

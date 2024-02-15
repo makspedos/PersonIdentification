@@ -3,13 +3,13 @@
 {% block content %}
     <div class="container">
         <div class="dark-blue-window">
-            <h1>Log In</h1>
+            <h1>Увійти</h1>
         </div>
         <div class="work-section">
             <form method="post">
                 {% csrf_token %}
                 {{ form|crispy }}
-                <button class="submit-form" type="submit">Log in</button>
+                <button class="submit-form" type="submit">Підтвердити</button>
             </form>
         </div>
     </div>

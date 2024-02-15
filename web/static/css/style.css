@@ -57,13 +57,13 @@ body, h1 {
 .work-section {
   padding: 40px;
   background-color: #f5f5f5;
-    min-height: 600px;
+    min-height: 900px;
 }
 
 h2 {
     font-size: 2.5em; /* Adjust the font size as needed */
     color: darkblue; /* Text color */
-    margin-bottom: 50px; /* Add space between title and paragraph */
+    margin-bottom: 40px; /* Add space between title and paragraph */
 }
 
 h2.property{
@@ -87,14 +87,14 @@ p{
     border: none; /* Remove border */
     cursor: pointer; /* Change cursor on hover */
     transition: background-color 0.3s ease; /* Smooth transition on hover */
+    float: right;
 }
 
 .submit-form2 {
     border-radius: 10px;
     font-size: 20px;
-    margin-top: 10px;
-    margin-right: 10px;
-    padding: 10px 20px;
+    margin-top: 40px;
+    padding: 20px 30px;
     background-color: lightblue; /* Green background color */
     border: none; /* Remove border */
     cursor: pointer; /* Change cursor on hover */
@@ -156,18 +156,21 @@ p{
     border: 4px solid #000; /* Adjust thickness and color as needed */
     border-radius: 10px; /* Adjust border radius for rounded corners */
     padding: 8px;
-    float: left;
-    width: 40%;
+    width: 50%;
+     margin-bottom: 40px;
 }
 
-.output{
-    float: right;
-    width: 60%;
-}
 
+.output h2{
+    text-align: center;
+}
 .description{
     width: 510px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 1);
     background-color: lightblue;
+}
+
+.container{
+    min-width: 70%;
 }
