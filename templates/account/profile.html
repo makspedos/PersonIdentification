@@ -10,12 +10,13 @@
             <div class="window">
                 <div class="profile">
                     <img src="{% static "account/profile.jpg" %}" alt="Profile Picture">
-                    <h2>{{ user.username }}</h2>
+                    <h2>@{{ user.username }}</h2>
                 </div>
             <ul class="properties">
                 <li><span>Пошта:</span> {{ user.email }}</li>
                 <li><span>Дата початку користування:</span> {{ user.date_joined }}</li>
-                <li><span>Роль:</span> Звичайна</li>
+
+                <li><span>Роль:</span>{% if user.is_superuser %}Адміністратор {% else %}Звичайна{% endif %}</li>
             </ul>
             </div>
             <div class="action-table">

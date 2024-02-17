@@ -1,7 +1,8 @@
 <div id="mySidebar" class="sidebar">
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-  <a href="{% url "web:home" %}">Головна сторінка</a>
-  <a href="{% url "web:form_page" %}#">Почати</a>
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+    <a href="{% url "web:home" %}">Головна сторінка</a>
+    <a href="{% url "web:form_page" %}#">Почати</a>
+    <a href="{% url 'web:help' %}">Підтримка</a>
   {% if user.is_authenticated %}
       <a href="{% url 'accounts:profile' %}">Профіль</a>
       <a href="{% url 'account_logout' %}">Вийти з акаунту</a>

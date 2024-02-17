@@ -10,3 +10,9 @@ function closeNav() {
 }
 
 
+function activateCheckbox(item){
+  var checkbox = item.querySelector('input[type="checkbox"]')
+  if (checkbox){
+     checkbox.checked = !checkbox.checked;
+  }
+}

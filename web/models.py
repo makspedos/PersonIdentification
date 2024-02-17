@@ -17,12 +17,11 @@ class Image(models.Model):
         managed = True
         db_table = 'image'
 
+class Question(models.Model):
+    text_question = models.CharField(max_length=150)
 
-class Mood(models.Model):
-    name = models.CharField(max_length=50)
-
-    class Meta:
-        managed = True
-        db_table = 'mood'
-
-
+    def __str__(self):
+        return self.text_question
+class Answer(models.Model):
+    text_answer = models.CharField(max_length=150)
+    question = models.OneToOneField(Question, on_delete= models.CASCADE, default=None)

@@ -3,5 +3,6 @@ from .models import *
 # Register your models here.
 
 admin.site.register(Image)
-admin.site.register(Mood)
 
+admin.site.register(Answer)
+admin.site.register(Question)

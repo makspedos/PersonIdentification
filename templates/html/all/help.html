@@ -1,0 +1,19 @@
+{% extends "html/_base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="container">
+        <div class="dark-blue-window">
+            <h1>Сторінка з підтримкою</h1>
+        </div>
+        <div class="work-section">
+            {% for answer in anwers %}
+                <div class="question">
+                    <p>{{ answer.question.id }}. {{ answer.question.text_question }}</p>
+                </div>
+                <div class="answer">
+                    <p>Відповідь: {{ answer.text_answer }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

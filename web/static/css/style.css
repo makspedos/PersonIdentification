@@ -10,9 +10,10 @@ h3{
 }
 caption.caption-one{
   background-color: lightblue;
-  font-size: 16px;
-  width: 300px;
+  font-size: 32px;
+  width: 500px;
   padding: 1px;
+
   position: absolute;
   text-align: center;
 
@@ -26,7 +27,10 @@ a.a-simple{
   color: blue;
 }
 th.table-th{
-  width: 300px;
+    padding-top: 25px;
+    font-size: 24px;
+  width: 500px;
+    height: 100px;
   padding-bottom: 10px;
   text-align: center;
   background: #ffffff;
@@ -121,15 +125,16 @@ p{
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     align-items: center; /* Center vertically */
     font-size: 24px;
+    cursor: pointer;
+
 }
 
 .checkbox-item input[type="checkbox"] {
-    margin-bottom: 5px; /* Space between checkbox and label */
+    margin-bottom: 5px;
 }
 
 .checkbox-item label {
     text-align: center;
-
 }
 #upload{
     display:none
@@ -173,4 +178,11 @@ p{
 
 .container{
     min-width: 70%;
+}
+
+.question{
+    font-size: 24px;
+}
+.answer p{
+    color: darkblue;
 }

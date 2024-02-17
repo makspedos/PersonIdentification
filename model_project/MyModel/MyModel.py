@@ -69,16 +69,6 @@ class PredictionModel():
     def gender_convert(self, output_gender):
         return 'Чоловік' if output_gender < 0.5 else 'Жінка'
 
-    # def emotion_convert(self, output_emotion):
-    #     key_emotion = ['Злість', 'Радість', 'Нейтральність', 'Сум', 'Здивованість']
-    #     values_emotion = []
-    #     for i in output_emotion:
-    #         i = f"{i:.10f}"
-    #
-    #         values_emotion.append(i)
-    #     output_emotion = dict(zip(key_emotion, values_emotion))
-    #     return output_emotion
-
     def emotion_convert(self, output_emotion):
         values_emotion = []
         for i in output_emotion:

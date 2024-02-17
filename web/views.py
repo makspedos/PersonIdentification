@@ -4,11 +4,16 @@ from .forms import FaceForm
 from .models import Image
 from model_project.MyModel.MyModel import PredictionModel
 from django.core.files.storage import FileSystemStorage
-
+from .models import Question, Answer
 
 def home(request):
     return render(request, 'html/all/home.html')
 
+
+def help_page(request):
+    questions = Question.objects.all()
+    anwers = Answer.objects.all()
+    return render(request, 'html/all/help.html', locals())
 
 def form_page(request):
     form = FaceForm(request.POST, request.FILES)
@@ -56,3 +61,5 @@ def work_page(request):
         context['list_emotions'] = list_emotions
 
     return render(request, 'html/all/work_page.html', context)
+
+
