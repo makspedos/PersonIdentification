@@ -3,6 +3,7 @@ from django.views import generic
 from django.urls import reverse_lazy
 from .forms import CustomUserCreationForm, CustomUserChangeForm, CustomPasswordChangeForm
 from django.contrib.auth import get_user_model
+from allauth.account.forms import AddEmailForm
 
 class SignUpPageView(generic.CreateView):
     form_class = CustomUserCreationForm
@@ -45,3 +46,16 @@ class AccountChangeUsername(generic.FormView):
             return redirect('accounts:profile')  # Redirect to the user's profile or any other appropriate page
         return render(request, self.template_name, {'form': form})
 
+# class AccountEmail(generic.FormView):
+#     form_class = CustomAddEmailForm
+#     template_name = "account/email.html"
+#     success_url = reverse_lazy('accounts:profile')
+#
+#     def get_form_kwargs(self):
+#         kwargs = super().get_form_kwargs()
+#         kwargs['request'] = self.request
+#         return kwargs
+#
+#     def form_valid(self, form):
+#         form.save()
+#         return super().form_valid(form)

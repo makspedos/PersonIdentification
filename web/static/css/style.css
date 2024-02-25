@@ -1,8 +1,6 @@
 body{
-  background-image: url("../account/background.png");
-}
-h3{
-  color: red;
+  background-image: url("../account/background.v1.png");
+
 }
 .button-return{
   margin-top: 10px;
@@ -17,10 +15,12 @@ caption.caption-one{
   position: absolute;
   text-align: center;
 
+
 }
 a.a-simple{
   text-decoration: none;
   color: blue;
+
 }
 
 .color-info{
@@ -42,6 +42,7 @@ th.table-th{
 body, h1 {
   margin: 0;
     max-height: 80%;
+    min-height: 70%;
 }
 
 /* Style for the dark blue window */
@@ -51,6 +52,7 @@ body, h1 {
   padding: 50px; /* Adjust padding as needed */
   text-align: left; /* Center the text */
   font-family: Arial, sans-serif; /* Change the font as desired */
+
 }
 
 .dark-blue-window h1 {
@@ -62,22 +64,26 @@ body, h1 {
   padding: 40px;
   background-color: #f5f5f5;
     min-height: 900px;
+
 }
 
 h2 {
     font-size: 2.5em; /* Adjust the font size as needed */
     color: darkblue; /* Text color */
     margin-bottom: 40px; /* Add space between title and paragraph */
+    font-family: "Segoe UI";
 }
 
 h2.property{
-    padding-top: 50px;
+    padding-top: 90px;
+
 }
 
 p{
   font-size: 1.2em; /* Adjust the font size as needed */
   color: #666; /* Text color */
   line-height: 1.6; /* Adjust line height for readability */
+
 }
 
 
@@ -106,6 +112,19 @@ p{
     float: right;
 }
 
+.submit-form3 {
+    border-radius: 10px;
+    font-size: 32px;
+    margin: 20px 40px;
+    padding: 20px 50px;
+    background-color: lightblue; /* Green background color */
+    border: none; /* Remove border */
+    cursor: pointer; /* Change cursor on hover */
+    transition: background-color 0.3s ease; /* Smooth transition on hover */
+    float: right;
+}
+
+
 .submit-form:hover {
     background-color: #45a049; /* Darker green on hover */
 }
@@ -126,6 +145,8 @@ p{
     align-items: center; /* Center vertically */
     font-size: 24px;
     cursor: pointer;
+    font-family: "Segoe UI";
+
 
 }
 
@@ -170,7 +191,9 @@ p{
     text-align: center;
 }
 .description{
-    width: 510px;
+    width: 450px;
+    padding: 10px;
+    font-size: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 1);
     background-color: lightblue;
@@ -185,4 +208,36 @@ p{
 }
 .answer p{
     color: darkblue;
+}
+
+.welcome-message h1{
+    font-size: 70px;
+    padding-top: 190px;
+    color: white;
+    font-family: "Segoe UI";
+}
+
+.empty-field {
+    border: 2px solid red; /* Example red border */
+}
+
+.error-message{
+    font-size: 24px;
+}
+
+.button-a{
+    border-radius: 10px;
+    font-size: 20px;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: lightblue;
+    border: none;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    color: darkblue;
+}
+
+h5{
+    font-size: 20px;
+    padding-bottom: 10px;
 }

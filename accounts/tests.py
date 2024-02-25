@@ -33,7 +33,6 @@ class TestUserCreation(TestCase):
         user = get_user_model().objects.create(email="user@gmail.com", username="usertest", password="user12345")
         self.assertEqual(get_user_model().objects.all()[0].email, user.email)
 
-
     def test_signup_view(self):
         view = resolve("/accounts/signup/")
         self.assertEqual(view.func.__name__, SignUpPageView.as_view().__name__)

@@ -3,14 +3,14 @@
 {% block content %}
     <div class="container">
         <div class="dark-blue-window">
-            <h1>Changing username</h1>
+            <h1>Змінити ім'я користувача</h1>
         </div>
-
     <div class="work-section">
         <form method="post">
-        {% csrf_token %}
-        {{ form|crispy }}
-        <button type="submit">Accept</button>
+            {% csrf_token %}
+            <label>Введіть нове ім'я користувача</label>
+            <input type="text" name="username" >
+            <button type="submit" class="submit-form">Підтвердити</button>
         </form>
         </div>
     </div>

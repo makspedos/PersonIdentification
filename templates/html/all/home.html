@@ -1,11 +1,9 @@
 {% extends "html/_base.html" %}
 {% block content %}
     <div class="container">
-        <div class="dark-blue-window">
-            <h1>Вітаю</h1>
-        </div>
-        <div class="work-section">
-
+        <div class="welcome-message">
+            <h1>Завантажуй зображення та дізнавайся вік, стать та емоції людей по обличчю</h1>
+            <a href="{% url 'web:form_page' %}"><button class="submit-form3">Розпочати</button></a>
         </div>
     </div>
 {% endblock %}

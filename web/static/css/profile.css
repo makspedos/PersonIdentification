@@ -37,3 +37,19 @@ ul.properties li {
     margin-bottom: 20px;
 }
 
+label {
+        display: block; /* Display the label as block to make it stack on top of the input */
+        margin-bottom: 10px; /* Add some space between the label and the input */
+        font-size: 24px; /* Adjust the font size */
+        color: #333; /* Set the text color */
+    }
+
+    /* Style for the input */
+    input{
+        width: 100%; /* Make the input full width */
+        padding: 10px; /* Add padding to the input */
+        font-size: 16px; /* Adjust the font size */
+        border: 1px solid #ccc; /* Add a border */
+        border-radius: 5px; /* Add border radius for rounded corners */
+        box-sizing: border-box; /* Include padding and border in the input's total width */
+    }

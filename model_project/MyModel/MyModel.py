@@ -29,7 +29,7 @@ class PredictionModel():
             result_params.append(self.model_prediction(img_gray, params))
             col = (0, 255, 0)
             cv2.putText(test_image, str(face_count), (x, y), cv2.FONT_HERSHEY_SIMPLEX, 1, col, 2)
-        cv2.imwrite(r'C:\Users\maksp\PycharmProjects\face_recognision\web\static\faces\face.png', test_image)
+        cv2.imwrite(r'/web/static/images/faces/face.png', test_image)
         col_list = list(result_params[0].keys())
         return result_params, col_list
 

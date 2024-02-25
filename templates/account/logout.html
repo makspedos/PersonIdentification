@@ -7,7 +7,7 @@
             <h1>Вийти з мережі</h1>
         </div>
     <div class="work-section">
-        <p>Ви впевнені, що хочете вийти з мережі ? </p>
+        <h2>Ви впевнені, що хочете вийти з мережі ? </h2>
         <form method="post" action="{% url 'account_logout' %}">
             {% csrf_token %}
             {{ form|crispy }}
