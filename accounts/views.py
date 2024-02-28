@@ -1,9 +1,13 @@
+from django.contrib import messages
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.views import generic
 from django.urls import reverse_lazy
 from .forms import CustomUserCreationForm, CustomUserChangeForm, CustomPasswordChangeForm
 from django.contrib.auth import get_user_model
-from allauth.account.forms import AddEmailForm
+from allauth.account.models import EmailAddress
+
+
 
 class SignUpPageView(generic.CreateView):
     form_class = CustomUserCreationForm
@@ -46,16 +50,44 @@ class AccountChangeUsername(generic.FormView):
             return redirect('accounts:profile')  # Redirect to the user's profile or any other appropriate page
         return render(request, self.template_name, {'form': form})
 
-# class AccountEmail(generic.FormView):
-#     form_class = CustomAddEmailForm
-#     template_name = "account/email.html"
-#     success_url = reverse_lazy('accounts:profile')
-#
-#     def get_form_kwargs(self):
-#         kwargs = super().get_form_kwargs()
-#         kwargs['request'] = self.request
-#         return kwargs
-#
-#     def form_valid(self, form):
-#         form.save()
-#         return super().form_valid(form)
+class AccountEmail(generic.ListView):
+    template_name = "account/email.html"
+    context_object_name = 'email_addresses'
+
+    def get_success_url(self):
+        return reverse_lazy('accounts:profile')
+    def get_queryset(self):
+        query = EmailAddress.objects.filter(user=self.request.user, primary=False)
+        return query
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['user'] = self.request.user
+        return context
+
+    def post(self, request, *args, **kwargs):
+        if 'email-add' in request.POST:
+            new_email = request.POST.get('email')
+            if EmailAddress.objects.filter(email=new_email):
+                messages.error(request, 'Пошта вже зайнята')
+                return HttpResponseRedirect(reverse_lazy('accounts:email'))
+
+            self.changing_primary(request, new_email)
+            EmailAddress.objects.create(user=self.request.user, email=new_email, primary=True, verified=True)
+
+
+        if 'email-primary' in request.POST:
+            email = request.POST.get('email')
+
+            self.changing_primary(request, email)
+            email_obj = EmailAddress.objects.get(email=email)
+            email_obj.primary = True
+            email_obj.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+    def changing_primary(self, request, new_email):
+        old_email = self.request.user.email
+        old_email_obj = EmailAddress.objects.get(email=old_email)
+        old_email_obj.primary = False
+        old_email_obj.save()
+        self.request.user.email = new_email
+        self.request.user.save()
