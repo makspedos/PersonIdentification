@@ -241,3 +241,7 @@ h5{
     font-size: 20px;
     padding-bottom: 10px;
 }
+
+.span-label span{
+    padding-left: 50px;
+}

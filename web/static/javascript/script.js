@@ -30,3 +30,14 @@ function validateForm() {
     }
     return true; // Allow form submission
 }
+
+function displayFileName() {
+        const input = document.getElementById('img-upload');
+        const fileNameSpan = document.getElementById('file-name');
+
+        if (input.files.length > 0) {
+            fileNameSpan.textContent = input.files[0].name;
+        } else {
+            fileNameSpan.textContent = '';
+    }
+}

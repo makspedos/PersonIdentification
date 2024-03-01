@@ -19,6 +19,8 @@ class PredictionModel():
         test_image = cv2.imread(f'C:/Users/maksp/PycharmProjects/face_recognision{img["image"]}')
         gray = cv2.cvtColor(test_image, cv2.COLOR_BGR2GRAY)
         faces = self.cascade.detectMultiScale(gray, 1.3, 5)
+        if faces is None:
+            return False
         face_count = 0
         result_params=[]
 
@@ -29,8 +31,12 @@ class PredictionModel():
             result_params.append(self.model_prediction(img_gray, params))
             col = (0, 255, 0)
             cv2.putText(test_image, str(face_count), (x, y), cv2.FONT_HERSHEY_SIMPLEX, 1, col, 2)
-        cv2.imwrite(r'/web/static/images/faces/face.png', test_image)
-        col_list = list(result_params[0].keys())
+        cv2.imwrite(r'C:\Users\maksp\PycharmProjects\face_recognision\media\faces\face.png', test_image)
+
+        try:
+            col_list = list(result_params[0].keys())
+        except IndexError:
+            return False
         return result_params, col_list
 
     def model_prediction(self, img_gray, params):

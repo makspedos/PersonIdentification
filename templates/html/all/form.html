@@ -18,17 +18,12 @@
             <h2>Оберіть зображення</h2>
                 <form method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
                 {% csrf_token %}
+
                     <label for="img-upload" class="file-input-label">
-                        <span class="submit-form">Завантажити</span>
-                        <input type="file" id="img-upload" name="img" accept="image/*">
+                        <span class="span-label" id="file-name"></span>
+                        <span class="submit-form2">Завантажити</span>
+                        <input type="file" id="img-upload" name="img" accept="image/*" onchange="displayFileName()">
                     </label>
-
-                    <div class="url-input-label">
-                        <label for="img-url">Введіть URL зображення:</label>
-                        <input type="url" id="img-upload" name="img" placeholder="https://example.com/image.jpg">
-                    </div>
-
-
 
                     <h2 class="property">Оберіть властивості:</h2>
                     <div class="description">

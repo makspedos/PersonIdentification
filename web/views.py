@@ -1,11 +1,9 @@
-import cv2
 from django.shortcuts import render, redirect
 from .forms import FaceForm
-from .models import Image
 from model_project.MyModel.MyModel import PredictionModel
 from django.core.files.storage import FileSystemStorage
 from .models import Question, Answer
-
+from .clean import clean_temp
 def home(request):
     return render(request, 'html/all/home.html')
 
@@ -47,9 +45,16 @@ def work_page(request):
     params = request.session.get('params', '')
     img = request.session.get('img', '')
     model = PredictionModel()
-    result_list, col_list = model.face_detection(params, img)
+    result = model.face_detection(params, img)
+    if result is False:
+        context = {
+            'image': False,
+        }
+        return render(request, 'html/all/work_page.html', context)
 
-    image = 'C:/Users/maksp/PycharmProjects/face_recognision/web/static/faces/face.png'
+    result_list, col_list = result[0],result[1]
+
+    image = r'C:\Users\maksp\PycharmProjects\face_recognision\media\faces\face.png'
     context = {
         'image': image,
         'result_list': result_list,
@@ -61,5 +66,9 @@ def work_page(request):
         context['list_emotions'] = list_emotions
 
     return render(request, 'html/all/work_page.html', context)
+
+def clean_page(request):
+    clean_temp()
+    return redirect('web:form_page')
 
 

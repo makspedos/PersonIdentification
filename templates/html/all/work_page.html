@@ -7,7 +7,7 @@
         </div>
         <div class="work-section">
             {% if image %}
-                <img src="{% static 'images/faces/face.png' %}" width="350" class="img-face" alt="Image description">
+                <img src="/media/faces/face.png" width="350"class="img-face" alt="Image description">
                     <div class="output">
                         <div class="text-left">
                             <h2>Передбачення</h2>
@@ -51,9 +51,9 @@
                         </table>
                     </div>
             {% else %}
-                <p>No images</p>
+                <h1>Ваше зображення неможливо розпізнати</h1>
             {% endif %}
-            <p><a href="{% url 'web:form_page' %}"><button class="submit-form">Повернутися до обирання меню форми</button></a></p>
+            <p><a href="{% url 'web:clean' %}"><button class="submit-form">Повернутися до обирання меню форми</button></a></p>
         </div>
     </div>
 {% endblock %}
