@@ -3,10 +3,11 @@
 {% block content %}
     <div class="container">
         <div class="dark-blue-window">
-            <h1>Результати ідентифікації</h1>
+            <h1>Результат ідентифікації</h1>
         </div>
         <div class="work-section">
-            {% if image %}
+            {% if user.is_authenticated %}
+                {% if image %}
                 <img src="/media/faces/face.png" width="350"class="img-face" alt="Image description">
                     <div class="output">
                         <div class="text-left">
@@ -40,7 +41,7 @@
                                         {% for key, value in dict_predict.items %}
                                             {% if key == "емоції" %}
                                                 {% for i in value %}
-                                                    <td>{{ i }}</td>
+                                                    <td>{{ i }}%</td>
                                                 {% endfor %}
                                              {% else %}
                                                 <td>{{ value }}</td>
@@ -50,10 +51,27 @@
                                 {% endfor %}
                         </table>
                     </div>
+                {% else %}
+                    <h1>Ваше зображення неможливо розпізнати</h1>
+                {% endif %}
+                <p><a href="{% url 'web:form_page' %}"><button class="submit-form">Повернутися до обирання меню форми</button></a></p>
+
+                <p><h5>Ви можете зберегти аналіз для перегляду
+                результату у профілі користувача. Обравши це, ваш результат ідентифікації буде збережений у системі, що дозволить
+                створити нові дані для навчання моделі. </h5></p>
+
+                <form method="post">
+                    {% csrf_token %}
+                    <!-- Include any hidden input fields to store necessary data for saving -->
+                    <input type="hidden" name="save_identification" value='True'>
+                    <button type="submit">Зберегти результати</button>
+                </form>
             {% else %}
-                <h1>Ваше зображення неможливо розпізнати</h1>
+                <h2>Щоб почати роботу зі застосунком вам потрібно спочатку авторизуватись</h2>
+                <a href="{% url 'account_login' %}" class="button-a">Увійти</a>
+                АБО
+                <a href="{% url 'account_signup' %}" class="button-a">Зареєструватись</a>
             {% endif %}
-            <p><a href="{% url 'web:clean' %}"><button class="submit-form">Повернутися до обирання меню форми</button></a></p>
         </div>
     </div>
 {% endblock %}

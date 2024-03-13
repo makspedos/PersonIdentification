@@ -1,7 +1,14 @@
-Django>=5.0
+Django==5.0
 numpy>=1.24.1
 django-crispy-forms>=2.1
 crispy-bootstrap5>=2023.10
 django-allauth>=0.59.0
-mysqlclient>=2.2.0
-opencv-python
+opencv-python==4.8.1.78
+whitenoise>=6.1.0
+gunicorn==20.1.0
+tensorflow==2.13.0
+keras==2.13.1
+asgiref==3.7.0
+sqlparse==0.4.2
+psycopg2-binary==2.9.6
+pillow==9.3.0

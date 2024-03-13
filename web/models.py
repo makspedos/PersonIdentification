@@ -1,23 +1,41 @@
+from django.contrib.auth import get_user_model
 from django.db import models
 
 
-class Image(models.Model):
-    img = models.ImageField(upload_to='images/')
-    age = models.CharField(max_length=20,null=True, blank=True)
-    gender = models.CharField(max_length=20,null=True, blank=True)
-
-    class Meta:
-        managed = True
-        db_table = 'image'
-
-
+User = get_user_model()
 class Question(models.Model):
     text_question = models.CharField(max_length=150)
 
     def __str__(self):
         return self.text_question
 
-
 class Answer(models.Model):
     text_answer = models.CharField(max_length=150)
     question = models.OneToOneField(Question, on_delete= models.CASCADE, default=None)
+
+    def __str__(self):
+        return self.text_answer
+
+
+class ImageFaces(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    img = models.ImageField(upload_to=r'C:\Users\maksp\PycharmProjects\face_recognision\media\faces_dataset')
+
+
+class Identification(models.Model):
+    EMOTION_CHOICES = (
+        ('Злість', 'Злість'),
+        ('Радість', 'Радість'),
+        ('Нейтральність', 'Нейтральність'),
+        ('Сум', 'Сум'),
+        ('Здивованість', 'Здивованість'),
+    )
+    GENDER_CHOICES = (
+        ('Чоловік', 'Чоловік'),
+        ('Жінка', 'Жінка')
+    )
+    image_face = models.ForeignKey(ImageFaces, on_delete=models.CASCADE)
+    age = models.IntegerField(default=None, blank=True, null=True)
+    gender = models.CharField(max_length=20, choices=GENDER_CHOICES, default=None, blank=True, null=True)
+    emotion = models.CharField(max_length=20, choices=EMOTION_CHOICES, default=None, blank=True, null=True)
+    face_number = models.IntegerField(default=1)

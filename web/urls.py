@@ -10,7 +10,6 @@ urlpatterns = [
     path('form/', views.form_page, name='form_page'),
     path('work/', views.work_page, name='work_page'),
     path('help/', views.help_page, name='help'),
-    path('clean/', views.clean_page, name='clean'),
 ]
 
 if settings.DEBUG:

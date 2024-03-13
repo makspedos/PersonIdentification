@@ -36,8 +36,32 @@ function displayFileName() {
         const fileNameSpan = document.getElementById('file-name');
 
         if (input.files.length > 0) {
-            fileNameSpan.textContent = input.files[0].name;
-        } else {
+            fileNameSpan.textContent = 'Обрано';
+        }
+        else if (document.getElementById('image-url').value){
+            fileNameSpan.textContent = '';
+        }
+        else {
             fileNameSpan.textContent = '';
     }
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('image-url').addEventListener('change', function () {
+        var imageUrl = this.value;
+        var uploadInput = document.getElementById('img-upload');
+        if (imageUrl) {
+            uploadInput.value = ''; // Clear the value of the file input
+            displayFileName()
+        }
+    });
+
+    document.getElementById('img-upload').addEventListener('change', function () {
+        var uploadInput = this.value;
+        var imageUrl = document.getElementById('image-url');
+        if (uploadInput) {
+            imageUrl.value = ''; // Clear the value of the file input
+            displayFileName()
+        }
+    });
+});
