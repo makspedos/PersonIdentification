@@ -54,18 +54,22 @@
                 {% else %}
                     <h1>Ваше зображення неможливо розпізнати</h1>
                 {% endif %}
-                <p><a href="{% url 'web:form_page' %}"><button class="submit-form">Повернутися до обирання меню форми</button></a></p>
 
-                <p><h5>Ви можете зберегти аналіз для перегляду
-                результату у профілі користувача. Обравши це, ваш результат ідентифікації буде збережений у системі, що дозволить
-                створити нові дані для навчання моделі. </h5></p>
-
+                </br>
+                <div class="description">
+                    <span>Також Ви можете зберегти аналіз для перегляду результату у профілі користувача.
+                        Обравши це, ваш результат ідентифікації буде збережений у системі, що дозволить
+                        створити нові дані для навчання моделі.
+                    </span>
                 <form method="post">
-                    {% csrf_token %}
-                    <!-- Include any hidden input fields to store necessary data for saving -->
-                    <input type="hidden" name="save_identification" value='True'>
-                    <button type="submit">Зберегти результати</button>
-                </form>
+                        {% csrf_token %}
+                        <!-- Include any hidden input fields to store necessary data for saving -->
+                        <input type="hidden" name="save_identification" value='True'>
+                    <button type="submit" class="description-button"><strong>Зберегти результати</strong></button>
+                    </form>
+                </div>
+
+                <p><a href="{% url 'web:form_page' %}"><button class="submit-form">Повернутися до обирання меню форми</button></a></p>
             {% else %}
                 <h2>Щоб почати роботу зі застосунком вам потрібно спочатку авторизуватись</h2>
                 <a href="{% url 'account_login' %}" class="button-a">Увійти</a>

@@ -6,7 +6,7 @@ from django.urls import reverse_lazy
 from .forms import CustomUserCreationForm, CustomUserChangeForm, CustomPasswordChangeForm
 from django.contrib.auth import get_user_model
 from allauth.account.models import EmailAddress
-
+from web.models import ImageFaces, Identification
 
 
 class SignUpPageView(generic.CreateView):
@@ -19,15 +19,16 @@ class AccountProfileView(generic.ListView):
     template_name = "account/profile.html"
     model = get_user_model()
 
-    def get_context_data(self,**kwargs):
+    def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['user'] = self.request.user
         return context
 
+
 class AccountChangePassword(generic.FormView):
     form_class = CustomPasswordChangeForm
     success_url = reverse_lazy('accounts:profile')
-    template_name =  'account/password_change.html'
+    template_name = 'account/password_change.html'
 
     def post(self, request):
         form = CustomPasswordChangeForm(request.POST, instance=request.user)
@@ -42,7 +43,6 @@ class AccountChangeUsername(generic.FormView):
     template_name = "account/username_change.html"
     success_url = reverse_lazy('accounts:profile')
 
-
     def post(self, request):
         form = CustomUserChangeForm(request.POST, instance=request.user)
         if form.is_valid():
@@ -50,15 +50,18 @@ class AccountChangeUsername(generic.FormView):
             return redirect('accounts:profile')  # Redirect to the user's profile or any other appropriate page
         return render(request, self.template_name, {'form': form})
 
+
 class AccountEmail(generic.ListView):
     template_name = "account/email.html"
     context_object_name = 'email_addresses'
 
     def get_success_url(self):
         return reverse_lazy('accounts:profile')
+
     def get_queryset(self):
         query = EmailAddress.objects.filter(user=self.request.user, primary=False)
         return query
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['user'] = self.request.user
@@ -73,7 +76,6 @@ class AccountEmail(generic.ListView):
 
             self.changing_primary(request, new_email)
             EmailAddress.objects.create(user=self.request.user, email=new_email, primary=True, verified=True)
-
 
         if 'email-primary' in request.POST:
             email = request.POST.get('email')
@@ -91,3 +93,21 @@ class AccountEmail(generic.ListView):
         old_email_obj.save()
         self.request.user.email = new_email
         self.request.user.save()
+
+
+class AccountSavedResults(generic.ListView):
+    template_name = 'account/results_page.html'
+    model = get_user_model()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['user'] = self.request.user
+
+        images = ImageFaces.objects.filter(user=self.request.user)
+        dict_results = {}
+        for i in images:
+            dict_results[i] = Identification.objects.filter(image_face=i)
+        print(dict_results)
+        context['dict_results'] = dict_results
+        context['col_list'] = ['Обличчя', 'Вік', 'Стать', 'Емоції']
+        return context
