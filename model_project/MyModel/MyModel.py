@@ -16,7 +16,6 @@ class PredictionModel():
             'C:/Users/maksp/PycharmProjects/face_recognision/haarcascade_frontalface_default.xml')
 
     def face_detection(self, params, img):
-        print(img["image"])
         test_image = cv2.imread(f'C:/Users/maksp/PycharmProjects/face_recognision/{img["image"]}')
         gray = cv2.cvtColor(test_image, cv2.COLOR_BGR2GRAY)
         faces = self.cascade.detectMultiScale(gray, 1.3, 5)

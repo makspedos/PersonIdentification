@@ -245,6 +245,11 @@ h5{
 .property_position{
     float:left;
 }
-.img_postion{
+.img_position{
     float:right;
+
+}
+.img-frame{
+    border-radius: 10px;
+    border: 4px solid #000; /* Adjust thickness and color as needed */
 }

@@ -1,14 +1,10 @@
-import os.path
-from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render, redirect
 from .forms import FaceForm
 from model_project.MyModel.MyModel import PredictionModel
-from .models import Question, Answer, Identification, ImageFaces
+from .models import Identification, ImageFaces
 from .clean import clean_temp
 import requests
 from face_recognision.custom_storage import CustomFileSystemStorage
-import shutil
-
 from .saved_img_mover import moving_files
 
 
@@ -17,9 +13,7 @@ def home(request):
 
 
 def help_page(request):
-    questions = Question.objects.all()
-    anwers = Answer.objects.all()
-    return render(request, 'html/all/help.html', locals())
+    return render(request, 'html/all/help.html')
 
 def form_page(request):
     form = FaceForm(request.POST, request.FILES)

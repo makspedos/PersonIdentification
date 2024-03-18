@@ -3,19 +3,6 @@ from django.db import models
 
 
 User = get_user_model()
-class Question(models.Model):
-    text_question = models.CharField(max_length=150)
-
-    def __str__(self):
-        return self.text_question
-
-class Answer(models.Model):
-    text_answer = models.CharField(max_length=150)
-    question = models.OneToOneField(Question, on_delete= models.CASCADE, default=None)
-
-    def __str__(self):
-        return self.text_answer
-
 
 class ImageFaces(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
