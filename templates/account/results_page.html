@@ -5,11 +5,10 @@
             <h1>Збережені результати ідентифікації</h1>
         </div>
         <div class="work-section">
+            {% if dict_results %}
                 {% for key, value in dict_results.items %}
-
                     <div class="img_position">
                         <img src="{{ key.img.url }}" class="img-frame" width="350">
-
                     </div>
                     <div class="result_position">
                         <table style="width:60%">
@@ -23,7 +22,11 @@
                                 {% for face in value %}
                                     <tr>
                                         <td>{{ face.face_number }}</td>
-                                        <td>{{ face.age }}</td>
+                                        {% if face.age != None %}
+                                            <td>{{ face.age }}</td>
+                                        {% else %}
+                                            <td>Не задано</td>
+                                        {% endif %}
                                         <td>{{ face.gender }}</td>
                                         <td>{{ face.emotion }}</td>
                                     </tr>
@@ -32,6 +35,10 @@
                     </div>
                     </br>
                 {% endfor %}
+            {% else %}
+                <h3>Не було знайдено результатів</h3>
+            {% endif %}
+
         </div>
     </div>
 {% endblock %}

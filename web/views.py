@@ -93,14 +93,13 @@ def work_page(request):
         count = 1
         for i in result_list:
             age = None
-            gender = None
-            emotion = None
+            gender = 'Не задано'
+            emotion = 'Не задано'
             if 'вік' in col_list:
                 age = i['вік']
             if 'стать' in col_list:
                 gender = i['стать']
             if 'емоції' in col_list:
-                print(i['емоції'])
                 max_emotion = []
                 for e in i['емоції']:
                     max_emotion.append(float(e))

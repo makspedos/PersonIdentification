@@ -6,7 +6,18 @@ import tensorflow as tf
 
 
 class PredictionModel():
+    _instance = None
+
+    def __new__(cls, *args, **kwargs):
+        if cls._instance is None:
+            cls._instance = super().__new__(cls)
+            cls._instance._initialized = False
+        return cls._instance
+
     def __init__(self):
+        if self._initialized:
+            return
+
         self.age_model = load_model(r'C:\Users\maksp\PycharmProjects\face_recognision\model_project\models\age\age.h5')
         self.gender_model = load_model(
             r'C:\Users\maksp\PycharmProjects\face_recognision\model_project\models\gender\gender-model.h5')
@@ -14,6 +25,7 @@ class PredictionModel():
             r'C:\Users\maksp\PycharmProjects\face_recognision\model_project\models\emotion\emotion.h5')
         self.cascade = cv2.CascadeClassifier(
             'C:/Users/maksp/PycharmProjects/face_recognision/haarcascade_frontalface_default.xml')
+        self._initialized = True
 
     def face_detection(self, params, img):
         test_image = cv2.imread(f'C:/Users/maksp/PycharmProjects/face_recognision/{img["image"]}')

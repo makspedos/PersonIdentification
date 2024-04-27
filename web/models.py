@@ -16,13 +16,16 @@ class Identification(models.Model):
         ('Нейтральність', 'Нейтральність'),
         ('Сум', 'Сум'),
         ('Здивованість', 'Здивованість'),
+        ('Не задано', 'Не задано')
     )
     GENDER_CHOICES = (
         ('Чоловік', 'Чоловік'),
-        ('Жінка', 'Жінка')
+        ('Жінка', 'Жінка'),
+        ('Не задано','Не задано')
+
     )
     image_face = models.ForeignKey(ImageFaces, on_delete=models.CASCADE)
     age = models.IntegerField(default=None, blank=True, null=True)
-    gender = models.CharField(max_length=20, choices=GENDER_CHOICES, default=None, blank=True, null=True)
-    emotion = models.CharField(max_length=20, choices=EMOTION_CHOICES, default=None, blank=True, null=True)
+    gender = models.CharField(max_length=20, choices=GENDER_CHOICES, default='Не задано', blank=True, null=True)
+    emotion = models.CharField(max_length=20, choices=EMOTION_CHOICES, default='Не задано', blank=True, null=True)
     face_number = models.IntegerField(default=1)
