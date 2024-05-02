@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from .forms import FaceForm
 from model_project.MyModel.MyModel import PredictionModel
 from .models import Identification, ImageFaces
-from .clean import clean_temp
+from web.clean import clean_temp
 import requests
 from face_recognision.custom_storage import CustomFileSystemStorage
 from .saved_img_mover import moving_files
@@ -16,14 +16,15 @@ def help_page(request):
     return render(request, 'html/all/help.html')
 
 def form_page(request):
+    print(request.FILES)
     form = FaceForm(request.POST, request.FILES)
     if request.POST:
             if form.is_valid():
                 clean_temp()
                 data = request.POST
-                age = data.get('age', None)
-                gender = data.get('gender', None)
-                emotion = data.get('emotion', None)
+                age = data.get('вік', None)
+                gender = data.get('стать', None)
+                emotion = data.get('емоції', None)
                 params = {'вік': age, 'стать': gender, 'емоції': emotion}
 
                 request.session['params'] = params

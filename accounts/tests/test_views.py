@@ -1,16 +1,20 @@
 from django.test import TestCase, Client
 from django.contrib.auth import get_user_model
-from accounts.forms import *
+
 from django.urls import reverse, resolve
 from accounts.views import SignUpPageView
 
-class TestUserCreation(TestCase):
-    def SetUp(self):
-        self.client = Client()
 
+User = get_user_model()
+
+class TestViews(TestCase):
+    def setUp(self):
+        self.user_1 = User.objects.create_user(email="user@gmail.com",username="user", password="test")
+        self.user_1.save()
     def test_login_view(self):
         response = self.client.get("/accounts/login/")
         self.assertTemplateUsed(response, "account/login.html")
+
 
     def test_signup_view(self):
         response = self.client.get(reverse("accounts:signup"))
@@ -19,3 +23,4 @@ class TestUserCreation(TestCase):
 
         view = resolve("/accounts/signup/")
         self.assertEqual(view.func.__name__, SignUpPageView.as_view().__name__)
+
