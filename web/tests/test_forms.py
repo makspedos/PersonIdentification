@@ -1,5 +1,4 @@
-from django.test import TestCase, Client
-from django.urls import reverse
+from django.test import TestCase
 from web import forms
 
 class TestForm(TestCase):

@@ -73,17 +73,21 @@ class AccountEmail(generic.ListView):
             if EmailAddress.objects.filter(email=new_email):
                 messages.error(request, 'Пошта вже зайнята')
                 return HttpResponseRedirect(reverse_lazy('accounts:email'))
-
+            if new_email == "":
+                messages.error(request, 'Введіть поле')
+                return HttpResponseRedirect(reverse_lazy('accounts:email'))
             self.changing_primary(request, new_email)
             EmailAddress.objects.create(user=self.request.user, email=new_email, primary=True, verified=True)
-
         if 'email-primary' in request.POST:
             email = request.POST.get('email')
-
             self.changing_primary(request, email)
             email_obj = EmailAddress.objects.get(email=email)
             email_obj.primary = True
             email_obj.save()
+        if 'email-delete' in request.POST:
+            email = request.POST.get('email')
+            email_obj = EmailAddress.objects.get(email=email)
+            email_obj.delete()
         return HttpResponseRedirect(self.get_success_url())
 
     def changing_primary(self, request, new_email):

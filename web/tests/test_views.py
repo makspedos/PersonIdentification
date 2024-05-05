@@ -1,4 +1,4 @@
-from unittest.mock import Mock, patch, MagicMock
+from unittest.mock import Mock, patch
 
 from django.contrib.auth import get_user_model
 from django.test import TestCase, Client
@@ -42,19 +42,16 @@ class TestViews(TestCase):
 
 
     @patch("web.views.PredictionModel.face_detection")
-    def test_work_view(self, mock_result):
+    def test_work_view_false(self, mock_result):
         login = self.client.login(email="user@gmail.com", password="test")
         mock_result.return_value = False
 
         mock_params = Mock()
-        mock_cols = Mock()
+        mock_img = Mock()
         expected_result = False
-        actual_result = web.views.PredictionModel.face_detection(mock_params, mock_cols)
-        print(actual_result)
-        assert actual_result ==expected_result
+        actual_result = web.views.PredictionModel.face_detection(mock_params, mock_img)
+        assert actual_result == expected_result
 
         response = self.client.get(reverse("web:work_page"))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'html/all/work_page.html')
-        # [{'вік':None,'стать':None, 'емоції':None}],["вік", 'стать', 'емоції']
-

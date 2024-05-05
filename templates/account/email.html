@@ -6,9 +6,8 @@
             <h1>Налаштування пошти</h1>
         </div>
         <div class="work-section">
-
             {% if user.email %}
-                <p>Ваша актуальна пошта: {{ user.email }}</p>
+                <p>Ваша актуальна пошта: <strong>{{ user.email }}</strong></p>
             {% else %}
                 <p>Пошта відсутня, необхідно додати</p>
             {% endif %}
@@ -16,9 +15,10 @@
             {% for email in email_addresses %}
                  <form action="{% url 'accounts:email' %}" method="post">
                     {% csrf_token %}
-                     {{ email.email }}
+                     <strong>{{ email.email }}</strong>
                     <input type="hidden" name="email" value="{{ email.email }}">
                     <button name="email-primary" type="submit" class="button-a">Зробити основною</button>
+                    <button name="email-delete" type="submit" class="button-a">Видалити</button>
                  </form>
             {% endfor %}
             <form action="{% url 'accounts:email' %}" method="post">
