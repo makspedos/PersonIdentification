@@ -55,3 +55,17 @@ class TestViews(TestCase):
         response = self.client.get(reverse("web:work_page"))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'html/all/work_page.html')
+        self.assertContains(response, 'Ваше зображення неможливо розпізнати')
+
+    @patch("web.views.PredictionModel.face_detection")
+    def test_work_view_true(self, mock_result):
+        login = self.client.login(email="user@gmail.com", password="test")
+        mock_result.return_value = ([{'вік': '20', 'стать': 'Чоловік', 'емоції': ['0.1', '0.2', '0.3', '0.4', '0.5']}], ['вік', 'стать', 'емоції'])
+
+
+        response = self.client.post(reverse("web:work_page"))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'html/all/work_page.html')
+        self.assertNotContains(response, 'Ваше зображення неможливо розпізнати')
+        self.assertContains(response, 'Чоловік')
+        self.assertNotContains(response, 'Жінка')

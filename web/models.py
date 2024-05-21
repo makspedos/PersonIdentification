@@ -9,6 +9,9 @@ class ImageFaces(models.Model):
     img = models.ImageField(upload_to=r'C:\Users\maksp\PycharmProjects\face_recognision\media\faces_dataset')
 
 
+    def __str__(self):
+        return self.user.__str__()
+
 class Identification(models.Model):
     EMOTION_CHOICES = (
         ('Злість', 'Злість'),
