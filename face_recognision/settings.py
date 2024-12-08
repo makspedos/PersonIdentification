@@ -11,15 +11,16 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
 from pathlib import Path
-
+from dotenv import load_dotenv
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
+load_dotenv()
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-^me!k0uupc+7sh^is!y+wgwb0k3@!ui!li*tq25o@zcm!ywh+!"
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -103,7 +104,7 @@ DATABASES = {
         'NAME': 'coursedb',
         'HOST': 'localhost',
         'USER': 'root',
-        'PASSWORD': 'Djangodotpy2003',
+        'PASSWORD': 'admin',
         'PORT': 3306,
         'OPTIONS': {
             'sql_mode': 'traditional',

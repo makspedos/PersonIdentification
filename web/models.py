@@ -6,7 +6,7 @@ User = get_user_model()
 
 class ImageFaces(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    img = models.ImageField(upload_to=r'C:\Users\maksp\PycharmProjects\face_recognision\media\faces_dataset')
+    img = models.ImageField(upload_to=r'C:\Users\maksim\PycharmProjects\face_recognision\media\faces_dataset')
 
 
     def __str__(self):
