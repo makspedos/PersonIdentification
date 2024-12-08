@@ -1,2 +1,7 @@
 *.jpg
 *.png
+.env
+azure_deploy/config.json
+.azureml
+.idea
+model_project/.idea

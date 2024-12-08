@@ -1,7 +1,7 @@
 import os
 
 def clean_temp():
-    directory = r'C:\Users\maksp\PycharmProjects\face_recognision\media\faces'
+    directory = r'C:\Users\maksim\PycharmProjects\face_recognision\media\faces'
     for filename in os.listdir(directory):
         file_path = os.path.join(directory, filename)
         try:
