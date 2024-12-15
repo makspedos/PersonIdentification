@@ -1,4 +1,4 @@
-from azureml.core.compute import AksCompute, ComputeTarget
+from azureml.core.compute import ComputeTarget
 import os
 from azureml.core import Workspace
 from azureml.core import Environment
@@ -6,22 +6,6 @@ import tensorflow as tf
 from azureml.core.model import Model
 from azureml.core import Webservice
 from azureml.core.model import InferenceConfig
-
-def setup_aks(ws):
-    aks_name = 'my-aks-cluster'
-    try:
-        aks_target = ComputeTarget(workspace=ws, name=aks_name)
-        print('Found existing aks cluster')
-    except:
-        print('Creating aks cluster')
-        aks_config = AksCompute.provisioning_configuration(
-            vm_size='Standard_B2ms',
-            agent_count=3,
-            location='eastus'
-        )
-        aks_target = ComputeTarget.create(workspace=ws, name=aks_name, provisioning_configuration=aks_config)
-        aks_target.wait_for_completion(show_output=True)
-    return aks_target
 
 
 def workspace_creation():

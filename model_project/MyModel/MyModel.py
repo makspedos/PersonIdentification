@@ -15,7 +15,7 @@ load_dotenv()
 
 class PredictionModel():
     """
-    Class uses cloud models to predict but if connection fails it will load local models instead
+    PredictionModel uses cloud models to predict but if connection fails it will load local models instead
     """
     _instance = None
 
@@ -129,18 +129,25 @@ class PredictionModel():
                 emotion_image = tf.expand_dims(emotion_image, 0)
                 output_emotion = self.emotion_model.predict(emotion_image)[0]
 
-        result_params['вік'] = int(output_age[0][0])
-        result_params['стать'] = self.gender_convert(output_gender[0][0])
+        result_params['вік'] = int(output_age[0][0]) if output_age !=0 else 0
+        result_params['стать'] = self.gender_convert(output_gender)
         result_params['емоції'] = self.emotion_convert(output_emotion)
         result_params = {key: value for key, value in result_params.items() if value != 0}
         return result_params
 
     def gender_convert(self, output_gender):
-        return 'Чоловік' if output_gender < 0.5 else 'Жінка'
+        if output_gender == 0:
+            return 0
+        else:
+            return 'Чоловік' if output_gender[0][0] < 0.5 else 'Жінка'
 
     def emotion_convert(self, output_emotion):
-        values_emotion = []
-        for i in output_emotion:
-            i = f"{i * 100:.2f}"
-            values_emotion.append(i)
-        return values_emotion
+        print(output_emotion)
+        if type(output_emotion) == int:
+            return 0
+        else:
+            values_emotion = []
+            for i in output_emotion:
+                i = f"{i * 100:.2f}"
+                values_emotion.append(i)
+            return values_emotion

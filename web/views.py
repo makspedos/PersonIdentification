@@ -9,7 +9,7 @@ from .saved_img_mover import moving_files
 from dotenv import load_dotenv
 
 load_dotenv()
-
+model = PredictionModel()
 
 def home(request):
     return render(request, 'html/all/home.html')
@@ -78,7 +78,7 @@ def download_image(url, save_path):
 def work_page(request):
     params = request.session.get('params', '')
     img = request.session.get('img', '')
-    model = PredictionModel()
+
     result = model.face_detection(params, img)
     if result is False:
         context = {

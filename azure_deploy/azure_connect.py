@@ -1,40 +1,9 @@
 from azureml.core import Workspace
 from azureml.core.webservice import LocalWebservice, AciWebservice
 from dotenv import load_dotenv
-from azureml.core.webservice import AksWebservice
 from azure_settings.configurations import *
 
 load_dotenv()
-
-
-def cloud_deploy_kubernetes(ws):
-    age_model = Model(ws, name='age_model')
-    gender_model = Model(ws, name='gender_model')
-    emotion_model = Model(ws, name='emotion_model')
-
-    env = create_environment()
-    inference_config = InferenceConfig(
-        entry_script="./scope.py",
-        environment=env
-    )
-
-    aks_target = setup_aks(ws)
-
-    aks_config = AksWebservice.deploy_configuration(
-        cpu_cores=2,
-        memory_gb=4,
-        enable_app_insights=True
-    )
-    service = Model.deploy(
-        workspace=ws,
-        name='akscloudservice',
-        models=[age_model, gender_model, emotion_model],
-        inference_config=inference_config,
-        deployment_config=aks_config,
-        deployment_target=aks_target,
-        overwrite=True,
-    )
-    service.wait_for_deployment(show_output=True)
 
 
 def local_deploy(ws):
