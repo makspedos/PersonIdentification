@@ -1,0 +1,46 @@
+{% extends "html/_base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}Email Settings | AI Face Analysis System{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="dark-blue-window">
+            <h1>Email settings</h1>
+        </div>
+        <div class="work-section">
+            {% if user.email %}
+                <p>Current email: <strong>{{ user.email }}</strong></p>
+            {% else %}
+                <p>No email address is connected to this account.</p>
+            {% endif %}
+
+            <p>Additional email addresses:</p>
+            {% for email in email_addresses %}
+                <form action="{% url 'accounts:email' %}" method="post">
+                    {% csrf_token %}
+                    <strong>{{ email.email }}</strong>
+                    <input type="hidden" name="email" value="{{ email.email }}">
+                    <button name="email-primary" type="submit" class="button-a">Make primary</button>
+                    <button name="email-delete" type="submit" class="button-a">Delete</button>
+                </form>
+            {% empty %}
+                <p>No additional email addresses.</p>
+            {% endfor %}
+
+            <form action="{% url 'accounts:email' %}" method="post">
+                {% csrf_token %}
+                <label for="email">Add a new email address</label>
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}">
+                            <h5>{{ message }}</h5>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                <input id="email" type="email" name="email">
+                <button name="email-add" type="submit" class="submit-form">Add email</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

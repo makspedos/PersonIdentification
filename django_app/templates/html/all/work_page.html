@@ -1,0 +1,74 @@
+{% extends "html/_base.html" %}
+{% block content %}
+    <div class="container">
+        <div class="dark-blue-window">
+            <h1>Identification Result</h1>
+        </div>
+        <div class="work-section">
+            {% if user.is_authenticated %}
+                {% if image %}
+                    <img src="{{ image }}" width="350" class="img-face" alt="Processed face image">
+                    <div class="output">
+                        <div class="text-left">
+                            <h2>Predictions</h2>
+                        </div>
+                        <table style="width:60%">
+                            <tr>
+                                <th rowspan="{% if "emotion" in col_list %}2{% else %}1{% endif %}">Face</th>
+                                {% for col in col_list %}
+                                    {% if col == 'emotion' %}
+                                        <th colspan="5">Emotion</th>
+                                    {% else %}
+                                        <th rowspan="{% if "emotion" in col_list %}2{% else %}1{% endif %}">
+                                            {% if col == 'age' %}Age{% elif col == 'gender' %}Gender{% else %}{{ col|title }}{% endif %}
+                                        </th>
+                                    {% endif %}
+                                {% endfor %}
+                            </tr>
+                            {% if list_emotions %}
+                                <tr>
+                                    {% for emotion in list_emotions %}
+                                        <td>{{ emotion }}</td>
+                                    {% endfor %}
+                                </tr>
+                            {% endif %}
+                            {% for dict_predict in result_list %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    {% for key, value in dict_predict.items %}
+                                        {% if key == "emotion" %}
+                                            {% for score in value %}
+                                                <td>{{ score }}%</td>
+                                            {% endfor %}
+                                        {% else %}
+                                            <td>{{ value }}</td>
+                                        {% endif %}
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                {% else %}
+                    <h1>The image could not be recognized</h1>
+                {% endif %}
+
+                <br>
+                <div class="description">
+                    <span>You can save this analysis and review it later in your profile.</span>
+                    <form method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="save_identification" value="True">
+                        <button type="submit" class="description-button"><strong>Save results</strong></button>
+                    </form>
+                </div>
+
+                <p><a href="{% url 'web:form_page' %}"><button class="submit-form">Back to form</button></a></p>
+            {% else %}
+                <h2>Please sign in before using the application</h2>
+                <a href="{% url 'account_login' %}" class="button-a">Sign in</a>
+                or
+                <a href="{% url 'account_signup' %}" class="button-a">Sign up</a>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

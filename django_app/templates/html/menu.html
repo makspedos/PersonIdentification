@@ -1,0 +1,17 @@
+<div id="mySidebar" class="sidebar">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">x</a>
+    <a href="{% url "web:home" %}">Home</a>
+    <a href="{% url "web:form_page" %}">Start</a>
+    <a href="{% url 'web:help' %}">Help</a>
+  {% if user.is_authenticated %}
+      <a href="{% url 'accounts:profile' %}">Profile</a>
+      <a href="{% url 'account_logout' %}">Sign out</a>
+  {% else %}
+      <a href="{% url 'account_login' %}">Sign in</a>
+      <a href="{% url 'account_signup' %}">Sign up</a>
+  {% endif %}
+</div>
+
+<div id="main">
+  <button class="openbtn" onclick="openNav()">Menu</button>
+</div>

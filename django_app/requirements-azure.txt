@@ -1,0 +1,4 @@
+# Optional Azure ML dependencies for legacy deployment experiments.
+# Not required for local model inference.
+-r requirements-ml.txt
+azureml-core>=1.54.0

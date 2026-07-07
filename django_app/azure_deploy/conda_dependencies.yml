@@ -1,0 +1,11 @@
+name: azureml_env
+dependencies:
+  - python=3.11
+  - pip
+  - pip:
+      - azureml-inference-server-http
+      - numpy
+      - pandas
+      - azureml-core
+      - tensorflow==2.12.0
+      - keras==2.12.0

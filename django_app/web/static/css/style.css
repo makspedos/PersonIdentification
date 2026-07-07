@@ -1,0 +1,330 @@
+body {
+    min-height: 100vh;
+    background:
+        linear-gradient(90deg, rgba(7, 17, 25, 0.92), rgba(7, 17, 25, 0.34)),
+        url("../img/face-analysis-background.png") center / cover fixed no-repeat;
+    color: #0f1720;
+}
+.button-return{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+caption.caption-one{
+  background-color: lightblue;
+  font-size: 32px;
+  width: 500px;
+  padding: 1px;
+
+  position: absolute;
+  text-align: center;
+
+
+}
+a.a-simple{
+  text-decoration: none;
+  color: blue;
+
+}
+
+.color-info{
+  color: blue;
+}
+th.table-th{
+    padding-top: 25px;
+    font-size: 24px;
+  width: 500px;
+    height: 100px;
+  padding-bottom: 10px;
+  text-align: center;
+  background: #ffffff;
+  border: 1px solid grey;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+body, h1 {
+  margin: 0;
+
+}
+
+/* Style for the dark blue window */
+.dark-blue-window {
+  background-color: #13293d; /* Dark blue color */
+  color: #ffffff; /* White text color */
+  padding: 50px; /* Adjust padding as needed */
+  text-align: left; /* Center the text */
+  font-family: Arial, sans-serif; /* Change the font as desired */
+
+}
+
+.dark-blue-window h1 {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+
+h2 {
+    font-size: 2.5em; /* Adjust the font size as needed */
+    color: darkblue; /* Text color */
+    margin-bottom: 25px; /* Add space between title and paragraph */
+    font-family: "Segoe UI";
+}
+
+h2.property{
+    padding-top: 90px;
+
+}
+
+p{
+  font-size: 1.2em; /* Adjust the font size as needed */
+  color: #666; /* Text color */
+  line-height: 1.6; /* Adjust line height for readability */
+
+}
+
+.url-field{
+    width: 250px;
+}
+
+.submit-form {
+    border-radius: 10px;
+    font-size: 20px;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: lightblue; /* Green background color */
+    border: none; /* Remove border */
+    cursor: pointer; /* Change cursor on hover */
+    transition: background-color 0.3s ease; /* Smooth transition on hover */
+    float: right;
+}
+.description-button{
+    border-radius: 10px;
+    font-size: 25px;
+    background-color: white; /* Green background color */
+    transition: background-color 0.3s ease; /* Smooth transition on hover */
+}
+
+.submit-form3 {
+    border-radius: 8px;
+    font-size: 24px;
+    margin: 20px 40px;
+    padding: 16px 32px;
+    background-color: #8ed8f8;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    float: right;
+}
+
+
+.submit-form:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+.checkbox-container {
+    display: flex;
+    flex-direction: row;
+    padding-left: 100px;
+     padding-top: 50px;
+}
+
+.checkbox-item {
+    margin-right: 150px; /* Adjust as needed */
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    align-items: center; /* Center vertically */
+    font-size: 24px;
+    cursor: pointer;
+    font-family: "Segoe UI";
+
+
+}
+
+.checkbox-item input[type="checkbox"] {
+    margin-bottom: 5px;
+}
+
+.checkbox-item label {
+    text-align: center;
+}
+#upload{
+    display:none
+}
+.file-input-label {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+
+}
+
+
+.file-input-label input[type="file"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.img-face{
+    border: 4px solid #000; /* Adjust thickness and color as needed */
+    border-radius: 10px; /* Adjust border radius for rounded corners */
+    padding: 8px;
+    width: 50%;
+     margin-bottom: 40px;
+}
+
+
+.output h2{
+    text-align: center;
+}
+.description{
+    width: 450px;
+    padding: 10px;
+    font-size: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+    background-color: lightblue;
+}
+.work-section {
+    padding: 40px;
+    background-color: #f5f5f5;
+    max-height: 100%; /* or specify a fixed height, e.g., max-height: 500px; */
+    /* Allow the container to scroll vertically if needed */
+    overflow-y: auto; /* or overflow-y: scroll; */
+    /* Ensure the container wraps its content */
+    flex-wrap: wrap;
+    /* Ensure the container's content stays within its boundaries */
+    overflow: hidden;
+     /* Add margin to create space between the container and its parent or other elements */
+    margin: 0 auto; /* Center the container horizontally */
+}
+.container{
+    min-width: 70%;
+}
+
+.question{
+    font-size: 24px;
+}
+.answer p{
+    color: darkblue;
+}
+
+.welcome-message h1 {
+    font-size: 70px;
+    padding-top: 190px;
+    color: white;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+.empty-field {
+    border: 2px solid red; /* Example red border */
+}
+
+.error-message{
+    font-size: 24px;
+}
+
+.button-a{
+    border-radius: 10px;
+    font-size: 20px;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: lightblue;
+    border: none;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    color: darkblue;
+}
+
+h5{
+    font-size: 20px;
+    padding-bottom: 10px;
+}
+
+.span-label span{
+    padding-left: 50px;
+}
+
+.property_position{
+    float:left;
+}
+.img_position{
+    float:right;
+
+}
+.img-frame{
+    border-radius: 10px;
+    border: 4px solid #000; /* Adjust thickness and color as needed */
+}
+
+.home-hero {
+    min-height: calc(100vh - 80px);
+    display: flex;
+    align-items: center;
+    padding: 96px 8vw 120px;
+}
+
+.home-hero-content {
+    max-width: 760px;
+}
+
+.home-hero h1 {
+    margin: 0 0 18px;
+    color: #ffffff;
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: clamp(48px, 7vw, 92px);
+    line-height: 0.98;
+    font-weight: 750;
+}
+
+.home-hero p {
+    max-width: 620px;
+    margin: 0 0 34px;
+    color: #d9edf5;
+    font-size: 24px;
+    line-height: 1.45;
+}
+
+.home-hero-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 56px;
+    padding: 0 28px;
+    border-radius: 8px;
+    background: #8ed8f8;
+    color: #07151f;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 700;
+    box-shadow: 0 18px 42px rgba(0, 0, 0, 0.22);
+}
+
+.home-hero-action:hover {
+    background: #b7e8fb;
+    color: #07151f;
+}
+
+@media (max-width: 700px) {
+    body {
+        background-attachment: scroll;
+    }
+
+    .home-hero {
+        min-height: calc(100vh - 64px);
+        padding: 72px 24px 96px;
+    }
+
+    .home-hero h1 {
+        font-size: 48px;
+    }
+
+    .home-hero p {
+        font-size: 19px;
+    }
+}

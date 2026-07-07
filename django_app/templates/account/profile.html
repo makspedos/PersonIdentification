@@ -1,0 +1,29 @@
+{% extends "html/_base.html" %}
+{% block content %}
+    <div class="container">
+        <div class="dark-blue-window">
+            <h1>Welcome, {{ user.username }}</h1>
+        </div>
+        <div class="work-section">
+            <div class="window">
+                <div class="profile">
+                    <h2>@{{ user.username }}</h2>
+                </div>
+                <ul class="properties">
+                    <li><span>Email:</span> {{ user.email }}</li>
+                    <li><span>Joined:</span> {{ user.date_joined }}</li>
+                    <li><span>Role:</span>{% if user.is_superuser %} Administrator{% else %} User{% endif %}</li>
+                </ul>
+            </div>
+            <div class="action-table">
+                <table>
+                    <caption class="caption-one"><strong>Actions:</strong></caption>
+                    <tr><th class="table-th"><a href="{% url 'accounts:email' %}" class="a-simple">Change email</a></th></tr>
+                    <tr><th class="table-th"><a href="{% url 'account_change_password' %}" class="a-simple">Change password</a></th></tr>
+                    <tr><th class="table-th"><a href="{% url 'accounts:username' %}" class="a-simple">Change username</a></th></tr>
+                    <tr><th class="table-th"><a href="{% url 'accounts:results' %}" class="a-simple">View saved results</a></th></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

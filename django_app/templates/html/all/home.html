@@ -1,0 +1,11 @@
+{% extends "html/_base.html" %}
+{% block title %}AI Face Analysis System{% endblock %}
+{% block content %}
+    <main class="home-hero">
+        <div class="home-hero-content">
+            <h1>AI Face Analysis System</h1>
+            <p>Estimate age, gender, and emotion from face images.</p>
+            <a class="home-hero-action" href="{% url 'web:form_page' %}">Start analysis</a>
+        </div>
+    </main>
+{% endblock %}

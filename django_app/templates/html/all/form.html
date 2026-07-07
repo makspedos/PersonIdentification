@@ -1,0 +1,61 @@
+{% extends 'html/_base.html' %}
+{% block content %}
+    <div class="container">
+        <div class="dark-blue-window">
+            <h1>
+                Quick workflow:<br>
+                1 Upload an image<br>
+                2 Select attributes<br>
+                3 Review predictions<br>
+            </h1>
+        </div>
+
+        <div class="work-section">
+            <h2>Select an image</h2>
+            <form method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
+                {% csrf_token %}
+                <label for="img-upload" class="file-input-label">
+                    <span class="submit-form">Upload file</span>
+                    <span class="span-label" id="file-name"></span>
+                    <input type="file" id="img-upload" name="img" accept="image/*" onchange="displayFileName()">
+                </label>
+                <br>
+                <div class="url-input">
+                    <label for="image-url">Or paste an image URL:</label>
+                    <input class="url-field" type="text" id="image-url" name="image_url" placeholder="https://example.com/photo.jpg">
+                </div>
+
+                <h2 class="property">Select attributes:</h2>
+                <div class="description">
+                    <h5>Note</h5>
+                    <span>Select at least one attribute to run prediction.</span>
+                </div>
+
+                <div class="row">
+                    <div class="checkbox-container">
+                        <div class="col-lg-4">
+                            <div class="checkbox-item" onclick="activateCheckbox(this)">
+                                <label class="label-box" for="age"><strong>Age</strong></label>
+                                <input type="checkbox" id="age" name="age" value="true">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="checkbox-item" onclick="activateCheckbox(this)">
+                                <label class="label-box" for="gender"><strong>Gender</strong></label>
+                                <input type="checkbox" id="gender" name="gender" value="true">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="checkbox-item" onclick="activateCheckbox(this)">
+                                <label class="label-box" for="emotion"><strong>Emotion</strong></label>
+                                <input type="checkbox" id="emotion" name="emotion" value="true">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="error-message" id="error-message" style="color: red; display: none;">Select at least one attribute.</div>
+                <button type="submit" class="submit-form">Submit</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

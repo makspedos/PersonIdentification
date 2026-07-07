@@ -1,0 +1,65 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Django runtime files
+db.sqlite3
+*.sqlite3
+media/
+staticfiles/
+
+# Local secrets and cloud credentials
+.env
+.env.*
+!.env.example
+azure_deploy/config.json
+**/azure_deploy/config.json
+.azureml/
+**/.azureml/
+
+# IDE/editor files
+.idea/
+**/.idea/
+.vscode/
+
+# Datasets, scratch images, and generated media
+data/
+datasets/
+**/data/
+**/datasets/
+django_app/model_project/
+
+# Model weights and training artifacts
+models/
+checkpoints/
+**/models/
+**/checkpoints/
+*.h5
+*.keras
+*.pt
+*.pth
+*.onnx
+*.ckpt
+
+# Notebook local state
+.ipynb_checkpoints/
+**/.ipynb_checkpoints/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Keep small documentation/demo assets trackable under docs/.
+!docs/
+!docs/**

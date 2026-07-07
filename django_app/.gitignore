@@ -1,0 +1,12 @@
+# Local Django runtime files
+.env
+db.sqlite3
+media/
+
+# Local secrets/cloud state
+azure_deploy/config.json
+.azureml/
+
+# Local IDE state and legacy scratch files
+.idea/
+model_project/

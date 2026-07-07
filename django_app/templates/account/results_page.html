@@ -1,0 +1,41 @@
+{% extends "html/_base.html" %}
+{% block content %}
+    <div class="container">
+        <div class="dark-blue-window">
+            <h1>Saved identification results</h1>
+        </div>
+        <div class="work-section">
+            {% if dict_results %}
+                {% for key, value in dict_results.items %}
+                    <div class="img_position">
+                        <img src="{{ key.img.url }}" class="img-frame" width="350" alt="Saved face analysis">
+                    </div>
+                    <div class="result_position">
+                        <table style="width:60%">
+                            <tr>
+                                {% for col in col_list %}
+                                    <th rowspan="1">{{ col|title }}</th>
+                                {% endfor %}
+                            </tr>
+                            {% for face in value %}
+                                <tr>
+                                    <td>{{ face.face_number }}</td>
+                                    {% if face.age != None %}
+                                        <td>{{ face.age }}</td>
+                                    {% else %}
+                                        <td>Not selected</td>
+                                    {% endif %}
+                                    <td>{{ face.gender }}</td>
+                                    <td>{{ face.emotion }}</td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                    <br>
+                {% endfor %}
+            {% else %}
+                <h3>No saved results found</h3>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
